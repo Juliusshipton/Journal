@@ -1,0 +1,83 @@
+﻿@model FitnessJournal.Models.Meal
+
+@{
+    ViewBag.Title = "New Meal";
+}
+
+<h1>New Meal</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        @*Cutom button for adding mealingredient*@
+        <div id="showmodal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <partial name="_AddMealIngredient" view-data="ViewData"/>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <button id='open' data-toggle="modal" data-target="#showmodal">Add Meal Ingredient</button>
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ingredient
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        ops
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (MealIngredient item in ViewBag.MealIngredients)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ingredient.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            <a asp-action="RemoveMealIngredient" asp-route-id="@item.MealIngredientId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

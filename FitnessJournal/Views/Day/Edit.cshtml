@@ -1,0 +1,91 @@
+﻿@model FitnessJournal.Controllers.DayEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Day</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        @*Cutom button for adding mealingredient*@
+        <div id="showmodal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <partial name="_AddDayMealEditPage" view-data="ViewData" />
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <button id='open' data-toggle="modal" data-target="#showmodal">Add Meal</button>
+
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Meal
+                    </th>
+                    <th>
+                        Calories
+                    </th>
+                    <th>
+                        ops
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DayMeal item in ViewBag.DayMeals)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Meal.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Meal.Calories)
+                        </td>
+                        <td>
+                            <a asp-action="RemoveDayMeal" asp-route-id="@item.DayMealId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DayId" />
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

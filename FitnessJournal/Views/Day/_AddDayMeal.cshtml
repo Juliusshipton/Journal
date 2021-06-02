@@ -1,0 +1,30 @@
+﻿
+@model FitnessJournal.Models.DayMeal
+
+
+<div class="modal-header">
+    <div>
+        <h5 class="modal-title">Add Meal To Day</h5>
+    </div>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+
+
+<div class="container">
+    <form asp-action="AddDayMeal">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Meal" class="control-label"></label>
+                    @Html.DropDownListFor(model => model.MealId, (IEnumerable<SelectListItem>)ViewData["AllMeals"], "Select Meal", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Add" class="btn btn-primary" />
+        </div>
+
+    </form>
+</div>
+
