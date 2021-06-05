@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessJournal", "FitnessJournal\FitnessJournal.csproj", "{5092C5A5-BFF3-4AEA-B434-0E87B77058FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessJournal.UI.Tests", "FitnessJournal.UI.Tests\FitnessJournal.UI.Tests.csproj", "{839C34CA-0856-4031-90FA-6B7012A83FA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessJournaI.Tests", "FitnessJournal.UI.Tests\FitnessJournaI.Tests.csproj", "{839C34CA-0856-4031-90FA-6B7012A83FA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

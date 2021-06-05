@@ -57,8 +57,7 @@ namespace FitnessJournal.Controllers
             _context.SaveChanges();
 
             // Initialize array of mealIngrediens to pass to view
-            List<MealIngredient> mealIngredients = _context.MealIngredient.Where(m => m.Meal.Name.Equals("$$$$_TEMP_MEAL_$$$$")).ToList();
-            ViewBag.MealIngredients = mealIngredients;
+            ViewBag.MealIngredients = Queries.Meal.GetTempMealIngredients(_context);
 
 
             return View();
