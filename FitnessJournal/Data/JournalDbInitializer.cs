@@ -15,28 +15,25 @@ namespace FitnessJournal.Data
             // Ensure database is created.
             _context.Database.EnsureCreated();
 
-            // Add base ingredients if none found. 
-            if (_context.Ingredient.ToList().Count == 0)
-            {
-                AddBaseIngredients(_context);
-            }
+            // Initialize ingredients
+            InitializeIngredients(_context);
 
-            // Ensure temp Meal is created for proper data binding and passing within Meal Create
-            if(_context.Meal.ToList().Count == 0)
-            {
-                Meal temp = new Meal()
-                {
-                    Name = "$$$$_TEMP_MEAL_$$$$",
-                    Description = "$$$$_TEMP_MEAL_$$$$",
-                };
+            // Initialize meals
+            InitializeMeals(_context);
 
-                _context.Meal.Add(temp);
-                _context.SaveChanges();
-            }
+            // Initialize days
+            InitializeDays(_context);
+
         }
 
-        private static void AddBaseIngredients(JournalDbContext _context)
+        private static void InitializeIngredients(JournalDbContext _context)
         {
+            // Don't do anything if there are existing ingredients
+            if(_context.Ingredient.ToList().Count != 0)
+            {
+                return;
+            }
+
             List<Ingredient> items = new List<Ingredient>();
 
             //Add test item to db to fix error.
@@ -115,6 +112,40 @@ namespace FitnessJournal.Data
             // Add all to database.
             _context.Ingredient.AddRange(items);
             _context.SaveChanges();
+        }
+    
+        
+        private static void InitializeMeals(JournalDbContext _context)
+        {
+            // Ensure temp Meal is created for proper data binding and passing within Meal Create
+            if (_context.Meal.ToList().Count == 0)
+            {
+                Meal temp = new Meal()
+                {
+                    Name = "$$$$_TEMP_MEAL_$$$$",
+                    Description = "$$$$_TEMP_MEAL_$$$$",
+                };
+
+                _context.Meal.Add(temp);
+                _context.SaveChanges();
+            }
+        }
+    
+
+        private static void InitializeDays(JournalDbContext _context)
+        {
+            // Ensure temp Meal is created for proper data binding and passing within Meal Create
+            if (_context.Day.ToList().Count == 0)
+            {
+                Day temp = new Day()
+                {
+                    Name = "$$$$_TEMP_DAY_$$$$",
+                    Description = "$$$$_TEMP_DAY_$$$$",
+                };
+
+                _context.Day.Add(temp);
+                _context.SaveChanges();
+            }
         }
     }
 }
