@@ -52,13 +52,11 @@ namespace FitnessJournal.Controllers
             InitializeIngredientDropDown();
 
             // Ensure all temp MealItems are removed.
-            List<MealIngredient> tempItems = _context.MealIngredient.Where(m => m.Meal.Name.Equals("$$$$_TEMP_MEAL_$$$$")).ToList();
-            _context.RemoveRange(tempItems);
+            _context.RemoveRange(Queries.Meal.GetTempMealIngredients(_context));
             _context.SaveChanges();
 
             // Initialize array of mealIngrediens to pass to view
             ViewBag.MealIngredients = Queries.Meal.GetTempMealIngredients(_context);
-
 
             return View();
         }
@@ -233,8 +231,7 @@ namespace FitnessJournal.Controllers
             _context.SaveChanges();
 
             // Initialize array of mealIngrediens to pass to view
-            List<MealIngredient> mealIngredients = _context.MealIngredient.Where(m => m.Meal.Name.Equals("$$$$_TEMP_MEAL_$$$$")).ToList();
-            ViewBag.MealIngredients = mealIngredients;
+            ViewBag.MealIngredients = Queries.Meal.GetTempMealIngredients(_context);
 
             // Clear input fields and return view.
             ModelState.Clear();
@@ -253,8 +250,7 @@ namespace FitnessJournal.Controllers
             InitializeIngredientDropDown();
 
             // Initialize array of mealIngrediens to pass to view
-            List<MealIngredient> mealIngredients = _context.MealIngredient.Where(m => m.Meal.Name.Equals("$$$$_TEMP_MEAL_$$$$")).ToList();
-            ViewBag.MealIngredients = mealIngredients;
+            ViewBag.MealIngredients = Queries.Meal.GetTempMealIngredients(_context);
 
             return View("Create");
         }
